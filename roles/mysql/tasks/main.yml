@@ -1,0 +1,42 @@
+---
+# tasks file for mysql
+
+
+- name: 'Install the mysql package'
+  apt:
+    name: 'mysql-server={{ mysql_version }}-0ubuntu0.20.02.1'
+    state: 'present'
+    update_cache: true
+  become: true
+
+- name: 'Install python requirements for mysql modules'
+  pip:
+    name: 'PyMySQL'
+    state: 'present'
+  become: true
+
+- name: 'Set mysql root user password'
+  mysql_user:
+    name: '{{ mysql_root_user_name  }}'
+    password: '{{ mysql_root_user_password }}'
+    login_unit_socket: '{{ mysql_unit_socket_path }}'
+    check_implicit_admin: true
+    login_user: '{{ mysql_root_user_name }}'
+    login_password: '{{ mysql_root_user_password }}'
+  become: true
+
+- name: 'Create a non-root mysql user'
+  mysql_user:
+    name: '{{ mysql_user_name }}'
+    password: '{{ mysql_user_password }}'
+    update_password: 'on_create'
+    priv: '{{ mysql_user_privileges }}'
+    login_user: '{{ mysql_root_user_name }}'
+    login_password: '{{ mysql_root_user_password }}'
+
+- name: 'Ensure that mysql service is started'
+  service:
+    name: 'mysql'
+    state: 'started'
+    enabled: true
+

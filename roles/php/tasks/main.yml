@@ -1,0 +1,17 @@
+---
+# tasks file for php
+
+- name: 'Install the php packages'
+  apt:
+    name: 
+      - 'php-fpm=2:{{ php_version  }}+82'
+      - 'php-mysql=2:{{ php_version  }}+82'
+    state: 'present'
+  become: true
+
+- name: 'Ensure php-fpm service is started'
+  service: 
+    name: 'php{{ php_version }}-fpm'
+    state: 'started'
+    enabled: true
+  become: true

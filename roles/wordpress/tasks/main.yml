@@ -1,0 +1,39 @@
+---
+# tasks file for wordpress
+
+- name: 'Download wordpress'
+  get_url:
+    url: '{{ wordpress_tar_source }}'
+    dest: '/var/www/latest.tar.gz'
+  become: true
+
+- name: 'Untar wordpress tar file'
+  unarchive:
+    src: '/var/www/latest.tar.gz'
+    dest: '/var/www'
+    remote_src: true
+    owner: '{{ wordpress_user }}'
+    group: '{{ wordpress_group }}'
+  become: true
+
+- name: 'Delete wordpress tar'
+  file:
+    path: '/var/www/latest.tar.gz'
+    state: 'absent'
+  become: true
+
+- name: 'Create wordpress DB'
+  mysql_db:
+    name: '{{ wordpress_mysql_db_name }}'
+    state: 'present'
+    login_user: '{{wordpress_mysql_login_user  }}'
+    login_password: '{{ wordpress_mysql_login_password }}'
+
+- name: 'Deploy wordpress config file'
+  template:
+    src: 'wp-config.php.j2'
+    dest: '/var/www/wordpress/wp-config.php'
+    owner: '{{ wordpress_user }}'
+    group: '{{ wordpress_group }}'
+  become: true
+  notify: '{{ wordpress_nginx_handler_name }}'

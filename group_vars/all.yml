@@ -1,0 +1,18 @@
+mysql_root_user_name: 'root'
+mysql_root_user_password: 'password'
+
+mysql_user_name: 'wp-user'
+mysql_user_password: 'wp-password'
+mysql_user_privileges: 'wordpress.*:ALL'
+
+
+nginx_document_root: '/var/www/wordpress'
+nginx_index_files: 'index.html index.htm index.php'
+
+nginx_server_name: '{{ ansible_host }}'
+nginx_php_fpm_sock_path: '/var/run/php/php{{ php_version }}-fpm.sock'
+
+wordpress_mysql_db_user: '{{ mysql_user_name }}'
+wordpress_mysql_db_password:  '{{ mysql_user_password }}'
+wordpress_mysql_login_user: '{{ mysql_root_user_name }}'
+wordpress_mysql_login_password: '{{ mysql_root_user_password }}'
