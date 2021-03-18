@@ -13,7 +13,7 @@
     src: 'nginx.conf.j2'
     dest: '/etc/nginx/sites-enabled/default'
     owner: '{{ nginx_user }}'
-    group: '{{ ngins_group }}'
+    group: '{{ nginx_group }}'
     mode: 0644
   become: true
 
@@ -21,5 +21,4 @@
   service:
     name: 'nginx'
     state: 'started'
-    enabled: true
   become: true

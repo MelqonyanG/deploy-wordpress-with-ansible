@@ -1,7 +1,7 @@
 ---
 # defaults file for mysql
 
-mysql_version: '8.0.23'
+mysql_version: '5.7.33'
 mysql_unix_socket_path: '/var/run/mysqld/mysqld.sock'
 
 mysql_root_user_name: 'root'

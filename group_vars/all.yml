@@ -1,3 +1,5 @@
+ansible_python_interpreter: 'python3'
+
 mysql_root_user_name: 'root'
 mysql_root_user_password: 'password'
 

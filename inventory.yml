@@ -1,2 +1,2 @@
 [webservers]
-web-server-01 ansible_host=192.168.5.3
+web-server-01 ansible_host=10.27.146.9

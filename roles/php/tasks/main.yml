@@ -4,8 +4,8 @@
 - name: 'Install the php packages'
   apt:
     name: 
-      - 'php-fpm=2:{{ php_version  }}+82'
-      - 'php-mysql=2:{{ php_version  }}+82'
+      - 'php-fpm=2:{{ php_version  }}+82+ubuntu18.04.1+deb.sury.org+1'
+      - 'php-mysql=2:{{ php_version  }}+82+ubuntu18.04.1+deb.sury.org+1'
     state: 'present'
   become: true
 

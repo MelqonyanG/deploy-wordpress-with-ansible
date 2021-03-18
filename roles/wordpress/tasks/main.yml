@@ -28,6 +28,8 @@
     state: 'present'
     login_user: '{{wordpress_mysql_login_user  }}'
     login_password: '{{ wordpress_mysql_login_password }}'
+    login_unix_socket: '/var/run/mysqld/mysqld.sock'
+  become: true
 
 - name: 'Deploy wordpress config file'
   template:
